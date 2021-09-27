@@ -40,13 +40,13 @@
 
 
 <form th:action="@{/manager/reply}" id="replyForm" th:method="post" >
-<input type="text" th:value="${inquiryDTO.inquiryNum}" name="inquiryNum" style="display:none;" />
+<input type="text" th:value="${inquiryDTO.inquiryNum}" name="inquiryNum"  style="display:none;" />
 <input type="text" th:value="${inquiryDTO.memberId}" name="memberId" style="display:none;" />
 <div class="container">    
     <label for="subject">제목</label>
-    <input type="text" id="a" name="inquiryCommentTitle"  />
+    <input type="text" id="a" autocomplete="off" name="inquiryCommentTitle"  />
     <label for="content">내용</label> 
-    <textarea id="b" cols="130" rows="30" name="inquiryCommentContent"></textarea>
+    <textarea id="b" cols="130" rows="30" autocomplete="off" name="inquiryCommentContent"></textarea>
      
 
 
