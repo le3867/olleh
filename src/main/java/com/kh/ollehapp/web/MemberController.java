@@ -231,10 +231,11 @@ return "mypage/modifyMember";
 
 /**
  * 회원수정 처리
+ * @throws IOException 
  */
 @PatchMapping("/modify")
 public String edit(@Valid @ModelAttribute ModifyForm modifyForm,
-									BindingResult bindingResult,HttpServletRequest request) {
+									BindingResult bindingResult,HttpServletRequest request,HttpServletResponse response) throws IOException {
 	log.info("회원수정처리 호출됨");
 	HttpSession session = request.getSession(false);
 	LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
@@ -242,9 +243,39 @@ public String edit(@Valid @ModelAttribute ModifyForm modifyForm,
 	//세션이없으면로그인페이지로이동
 	//if(loginMember == null) return "redirect:/login";
 	
-	if(bindingResult.hasErrors()) {
-		log.info("errors={}",bindingResult);
-		return "mypage/memberEditForm";
+	log.info("modifyForm:{}",modifyForm);
+	
+
+	if(modifyForm.getMemberPw()=="") {
+		response.setContentType("text/html; charset=UTF-8");
+		 
+		PrintWriter out = response.getWriter();
+		 
+		out.println("<script>alert('빈칸이 존재합니다.'); location.href='javascript:history.back()';</script>");
+		 
+		out.flush();
+
+		return "mypage/modifyMember";
+	}else if(modifyForm.getEmail()==""){
+		response.setContentType("text/html; charset=UTF-8");
+		 
+		PrintWriter out = response.getWriter();
+		 
+		out.println("<script>alert('빈칸이 존재합니다.'); location.href='javascript:history.back()';</script>");
+		 
+		out.flush();
+
+		return "mypage/modifyMember";
+	}else if(modifyForm.getTel()=="") {
+		response.setContentType("text/html; charset=UTF-8");
+		 
+		PrintWriter out = response.getWriter();
+		 
+		out.println("<script>alert('빈칸이 존재합니다.'); location.href='javascript:history.back()';</script>");
+		 
+		out.flush();
+
+		return "mypage/modifyMember";
 	}
 	
 	

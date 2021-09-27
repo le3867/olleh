@@ -24,16 +24,15 @@
 		background-color : inherit;
 	}
 
-.overlaybox {position:relative;width:250px;height:180px;background-color: transparent; outline:10px solid #fe9090;padding:15px 10px;}
 .overlaybox div, ul {overflow:hidden;margin:0;padding:0;}
 .overlaybox li {list-style: none;}
-.overlaybox .boxtitle {color:#fff;font-size:16px; font-weight:bold;  font-family: 'IM_Hyemin-Bold';background-color:#fe9090; right: 120px;margin-bottom:8px;}
-.overlaybox .first {position:relative;width:247px;height:29px;background: #fe9090;margin-bottom:3px;}
+.overlaybox .boxtitle {color:#fff;font-size:16px;font-weight:bold; margin-bottom:8px;}
+.overlaybox .first {position:relative;width:247px;height:136px;margin-bottom:8px;}
 .first .text {color:#fff;font-weight:bold;}
-.first .triangle {position: absolute;width: 48px;height: 48px;top: -2px;left: 3px;background: url(test1.html) no-repeat;padding: 6px;font-size: 18px;font-family: 'IM_Hyemin-Bold';}
-.first .movietitle{ position: absolute;width: 90%;bottom: 0;padding: 7px 25px;font-size: 12px;font-family: 'IM_Hyemin-Bold';}
+.first .triangle {position:absolute;width:48px;height:48px;top:0;left:0;padding:6px;font-size:18px;}
+.first .movietitle {position:absolute;width:100%;bottom:0;background:rgba(0,0,0,0.4);padding:7px 15px;font-size:14px;}
 .overlaybox ul {width:247px;}
-.overlaybox li {position:relative;margin-bottom:2px;background:#fe9090;padding:5px 10px;color:#fff;font-family: 'IM_Hyemin-Bold';line-height: 1;}
+.overlaybox li {position:relative;margin-bottom:2px;background:#2b2d36;padding:5px 10px;color:#aaabaf;line-height: 1;}
 .overlaybox li span {display:inline-block;}
 .overlaybox li .number {font-size:16px;font-weight:bold;}
 .overlaybox li .title {font-size:13px;}
@@ -44,6 +43,10 @@
 .overlaybox li:hover {color:#fff;background:#d24545;}
 .overlaybox li:hover .up {background-position:0 0px;}
 .overlaybox li:hover .down {background-position:0 -20px;}   
+
+.villname:hover{
+cursor:pointer;
+}
 </style>
 
 <body>
@@ -270,27 +273,25 @@
       let rdnmadr = data[i].rdnmadr; //체험마을 주소
 
       positions[i] = { content:    '<div class="overlaybox">' +
-    		  
-    		  '    <div class="first">' +
-    		    '    <ul>' +
-    		    '        <div class="triangle text">1</div>' +
-    		    '        <div class="movietitle text">🌾체험마을이름 : '+exprnVillageNm +'</div>' +
-    		    '     </ul>' +
-    		    '    </div>' +
-  		    '        <li class="up">' +
-  		    '            <span class="number">2</span>' +
-  		    '            <span class="title">🌾체험종류 :'+ exprnSe+'</span>' +
-  		    '        </li>' +
-  		    '        <li>' +
-  		    '            <span class="number">3</span>' +
-  		    '            <span class="title">🌾체험이름:'+exprnCn+'</span>' +
-  		    '        </li>' +
-  		    '        <li>' +
-  		    '            <span class="number">4</span>' +
-  		    '            <span class="title">🌾주소:'+rdnmadr+'</span>' +
-  		    '        </li>' +
-  		    '    </ul>' +
-  		    '</div>' 
+		    '    <ul>' +
+		    '        <li class="up">' +
+		    '            <span class="number">체험마을이름</span>' +
+		    '            <span class="title">'+exprnVillageNm+'</span>' +
+		    '        </li>' +
+		    '        <li>' +
+		    '            <span class="number">체험프로그램</span>' +
+		    '            <span class="title">'+exprnSe+'</span>' +
+		    '        </li>' +
+		    '        <li>' +
+		    '            <span class="number">체험이름</span>' +
+		    '            <span class="title">'+exprnCn+'</span>' +
+		    '        </li>' +
+		    '        <li>' +
+		    '            <span class="number">주소</span>' +
+		    '            <span class="title">'+rdnmadr+'</span>' +
+		    '        </li>' +
+		    '    </ul>' +
+		    '</div>'
   	  	  , latlng: new kakao.maps.LatLng(Latitude, Longitude) }
   }
  	
@@ -370,7 +371,7 @@
         infowindow.close();
       };
     }
-    
+   
   </script>
 
 </body>

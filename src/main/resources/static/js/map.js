@@ -31,10 +31,18 @@ const $villageList = document.getElementById('villageList');
 	$villageList.addEventListener("click",e=>{
 		console.log("클릭")
 	})
-			var row = '<tr><td>'+villageList[i].id+'</td><td class="villname" th:data-id="'+villageList[i].id+'">'+villageList[i].exprnVillageNm+'</td><td>'+villageList[i].homepageUrl+'</td><td>'+villageList[i].rprsntvName+'</td><td>'+villageList[i].phoneNumber+'</td><td>'+villageList[i].ctprvnNm+'</td><td>'+villageList[i].signguNm+'</td><td>'+villageList[i].exprnSe+'</td><td>'+villageList[i].exprnCn+'</td><td>'+villageList[i].rdnmadr+'</td><td>'
+			var row = '<tr><td>'+villageList[i].id+'</td><td><p class="villname" data-villid="'+villageList[i].id+'">'+villageList[i].exprnVillageNm+'</p></td><td>'+villageList[i].homepageUrl+'</td><td>'+villageList[i].rprsntvName+'</td><td>'+villageList[i].phoneNumber+'</td><td>'+villageList[i].ctprvnNm+'</td><td>'+villageList[i].signguNm+'</td><td>'+villageList[i].exprnSe+'</td><td>'+villageList[i].exprnCn+'</td><td>'+villageList[i].rdnmadr+'</td><td>'
 			$villageList.innerHTML += row
 		}
-			
+			  const $villname = document.querySelectorAll(".villname")
+
+    for(const button of $villname){
+    	button.addEventListener('click',e=>{
+	const id = e.target.dataset.villid;
+    		console.log(id);
+    		location.href=`/village/${id}`
+    	});
+    }
 	} else {
 		alert('해당 정보가 없습니다.');
 	}
@@ -45,7 +53,7 @@ const searchBtn_err_f = err => {
 }
 
 const search_Btn = e => {
-	console.log('버튼 클릭됨!');
+	
 
 	//ajax call
 		const vregion = $region.value;
@@ -66,13 +74,6 @@ const searchBtn_init = e => {
 window.addEventListener("DOMContentLoaded", searchBtn_init);
 
 
-const $villname = document.querySelectorAll(".villname")
-
-for(const button of $villname){
-	button.addEventListener("click",e=>{
-		console.log("클릭됨11");
-	});
-}
 
 
 	$searchBtn.addEventListener("click",e=>{
