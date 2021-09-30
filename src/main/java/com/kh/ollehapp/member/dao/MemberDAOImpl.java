@@ -360,7 +360,44 @@ return result;
 		List<bookmarkForm> list = jdbcTemplate.query(sql.toString(),new BeanPropertyRowMapper<>(bookmarkForm.class),memberId);
 		return list;
 	}
-	 
+	
+	//관심리스트 전체 레코드수
+	@Override
+	public List<bookmarkForm> list(int startRec, int endRec,String memberId) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select t1.* ");
+		sql.append("  from (select row_number() over(order by bookmarknum desc) as num, ");
+		sql.append(" village.id, ");
+		sql.append(" exprnVillageNm, ");
+		sql.append(" bookmarkNum, ");
+		sql.append(" memberId, ");
+		sql.append("  rdnmadr,  ");
+		sql.append("  exprnCn ");
+		sql.append("   from bookmark, village where bookmark.id=village.id ) t1  ");
+		sql.append(" where num between ? and ?  ");
+		sql.append(" and memberId = ?  ");
+		
+		List<bookmarkForm> list = jdbcTemplate.query(
+				sql.toString(), 
+				new BeanPropertyRowMapper<>(bookmarkForm.class),
+				startRec,endRec,memberId
+				);	
+return list;
+	}
+//게시판 전체 레코드수
+	@Override
+	public long totoalRecordCount(String memberId) {
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("select count(*) ");
+		sql.append("	from bookmark ");
+		sql.append("	where memberId = ? ");
+		
+		long totalCount = jdbcTemplate.queryForObject(sql.toString(), Long.class , memberId);
+		return totalCount;
+	}
+	
+	
 	/**
 	 * 관심리스트 삭제
 	 */

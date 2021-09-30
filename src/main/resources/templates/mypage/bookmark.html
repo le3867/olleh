@@ -8,11 +8,27 @@
   <title>예약조회 및 취소</title>
     <link rel="stylesheet" href="/css/reservation.css">
 </head>
+<style>
+    .wrap-bbs-paging{
+    	display:flex;
+    	justify-content: center;
+    }
+    .page-link{color:black; padding:0px; margin-left:15px;  text-align : center; }
+    
+    ul,li{
+    text-align : center;
+      list-style:none;}
+      
+      .justify-content-center
+      {height:20px; line-height:20px; text-align : center;
+      display:flex; justify-content:center;}
+
+</style>
 <body>
     <body style="overflow-x: hidden"></body>
     
     <div class="container-text">
-        <h2>예약조회 및 취소</h2>
+        <h2>관심리스트</h2>
     </div>
     
     <label for="menuicon">
@@ -79,6 +95,26 @@
         </td>
         
 </table>
+
+   <!-- 페이징 -->
+							<div class="wrap-bbs-paging">
+							  <ul class="pagination pagination-sm justify-content-center">
+							    <th:block th:each="pnum : ${#numbers.sequence(fc.startPage,fc.endPage)}">
+							    	<th:block th:if="${pnum != 0}">
+	 									<li class="page-item active" aria-current="page"
+	 											th:if="${fc.rc.reqPage == pnum}">
+								      <span class="page-link" th:text="${pnum}">1</span>
+								    </li>							    
+								    <li class="page-item" 
+								    		th:if="${fc.rc.reqPage != pnum}">
+								    	<a class="page-link" href="#" th:href="@{/member/bookmark/{reqPage}(reqPage=${pnum})}" th:text="${pnum}">3</a>
+								    </li>
+								    </th:block>
+							    </th:block>
+							   
+							  </ul>
+							</div>
+
 </choose>
 <script>
 	const $vilBtn = document.querySelectorAll('.vilBtn')

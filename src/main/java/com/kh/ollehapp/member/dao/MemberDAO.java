@@ -123,6 +123,13 @@ void deleteInquiry(String inquiryNum);
  * 관심리스트 목록
  */
 List<bookmarkForm> bookmarkList(String memberId);
+List<bookmarkForm> list(int startRec, int endRec,String memberId);
+
+/**
+ * 게시판 전체 레코드 총수 
+ * @return
+ */
+long totoalRecordCount(String memberId);
 
 /**
  * 관심리스트 삭제

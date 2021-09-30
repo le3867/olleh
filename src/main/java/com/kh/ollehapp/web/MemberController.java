@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ollehapp.domain.common.dao.CodeDAO;
+import com.kh.ollehapp.domain.common.paging.FindCriteria;
 import com.kh.ollehapp.member.dto.MemberDTO;
 import com.kh.ollehapp.member.dto.InquiryComDTO;
 import com.kh.ollehapp.member.dto.InquiryDTO;
@@ -50,7 +53,9 @@ public class MemberController {
 
 	private final MemberSVC memberSVC;
 	
-	
+	@Autowired
+	@Qualifier("fc10")
+	private FindCriteria fc;
 
 
 	//아이디 비밀번호 찾기 양식
@@ -500,17 +505,31 @@ public String deleteInquiry(@PathVariable String inquiryNum) {
 /**
  * 관심리스트 양식
  */
-@GetMapping("/bookmark")
-public String bookmarkList(HttpServletRequest request,Model model) {
+@GetMapping({"/bookmark",
+						"/bookmark/{reqPage}"})
+public String bookmarkList(HttpServletRequest request,@PathVariable(required = false) Integer reqPage,Model model) {
 	HttpSession session = request.getSession(false);
 	LoginMember loginMember
 	=(LoginMember)session.getAttribute("loginMember");
 	
-	List<bookmarkForm> list = memberSVC.bookmarkList(loginMember.getMemberId());
+	List<bookmarkForm> list = null;
 	
+//요청페이지가 없으면 1페이지로
+		if(reqPage == null) reqPage = 1;
+		//사용자가 요청한 페이지번호
+		fc.getRc().setReqPage(reqPage);	
+	
+		fc.setTotalRec(memberSVC.totoalRecordCount(loginMember.getMemberId()));
+		
+		list = memberSVC.list(
+				fc.getRc().getStartRec(),
+				fc.getRc().getEndRec(),loginMember.getMemberId());	
+		
 	model.addAttribute("blist",list);
+	model.addAttribute("fc",fc);
 	
 	log.info("blist:{}",list);
+	log.info("fc:{}",fc);
 	
 	return "mypage/bookmark";
 }

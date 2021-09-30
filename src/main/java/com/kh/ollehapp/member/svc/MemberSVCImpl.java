@@ -226,7 +226,19 @@ InquiryComDTO inquiryComDTO = memberDAO.mfindInquiry(inquiryNum, memberId);
 
 	return inquiryComDTO;
 }
+
+@Override
+public List<bookmarkForm> list(int startRec, int endRec, String memberId) {
+	List<bookmarkForm> list = memberDAO.list(startRec,endRec,memberId);
+	return list;
+}
 	
+//게시판 전체 레코드수
+@Override
+public long totoalRecordCount(String memberId) {
+
+	return memberDAO.totoalRecordCount(memberId);
+}
 	
 	
 	

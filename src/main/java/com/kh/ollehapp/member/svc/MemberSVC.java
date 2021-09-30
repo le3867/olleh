@@ -119,6 +119,20 @@ void deleteInquiry(String inquiryNum);
 List<bookmarkForm> bookmarkList(String memberId);
 
 /**
+ * 관심리스트 전체 요청페이지 목록
+ * @param startRec
+ * @param endRec
+ * @return
+ */	
+List<bookmarkForm> list(int startRec, int endRec,String memberId);
+
+/**
+ * 게시판 전체 레코드 수 
+ * @return
+ */
+long totoalRecordCount(String memberId);
+
+/**
  * 관심리스트 삭제
  */
 void deleteBookmark(long bookmarkNum);
