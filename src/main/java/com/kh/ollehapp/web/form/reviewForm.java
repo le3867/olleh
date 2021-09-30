@@ -11,6 +11,6 @@ public class reviewForm {
 	 private String reviewTitle;
 	 private String exprnvillageNm;
 	 private String rdnmadr;
-	 private String experience ;
+	 private String exprnCn ;
 }
 

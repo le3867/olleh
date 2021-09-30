@@ -10,6 +10,13 @@
     <script src="/js/inquiry.js" defer></script>
 	 <script src="/js/common/ajaxCall.js" defer></script>
 </head>
+<style>
+table{table-layout:fixed; width:800px;}
+table th{text-align: center; width:140px;} 
+table td {text-align:center; padding: 6px; width:140px; height: 15px; box-sizing: border-box; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; }
+
+
+</style>
 <body>
     
     <div class="container-text">
@@ -77,7 +84,7 @@
                     <td for="no-1"><a th:text="${inquiry?.inquiryNum}" style="color: black">pro-01</a></td>
                     <td for="category1-1"><a th:text="${inquiry?.inquiryType}" style="color: black">예약문의</a></td>
                     <td for="subject1-1"><a  th:text="${inquiry?.inquiryTitle}" style="color: black">안녕하세요</a></td>
-                    <td for="content1-1"><a th:text="${inquiry?.inquiryContent}" style="color: black">안녕하세요</a></td>
+                    <td for="content1-1"><a th:text="${inquiry?.inquiryContent}" style="color: black;">안녕하세요</a></td>
                 	<td>
                         <a href="#section3" class="change"  style="padding: 15px ; color:black;" th:data-inquirynum="${inquiry.inquiryNum}">자세히</a>
                     </td>

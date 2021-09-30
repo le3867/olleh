@@ -76,6 +76,21 @@ public class ReservationController {
 		LoginMember loginMember
 		=(LoginMember)session.getAttribute("loginMember"); 
 		
+		log.info("reservationForm:{}",reservationForm);
+		
+		if(reservationForm.getReservationDate()=="") {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script>alert('날짜를 입력하셔야됩니다.'); location.href='javascript:history.back()';</script>");
+			 
+			out.flush();
+
+			return "/village/{reservationForm.getId}";
+		}
+		
+		
 		ReservationForm reservationForm2 = reservationSVC.findvill(reservationForm.getId());
 		
 		int count = reservationSVC.reservationCount(reservationForm.getId());

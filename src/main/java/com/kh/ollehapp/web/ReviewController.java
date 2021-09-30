@@ -79,6 +79,8 @@ public class ReviewController {
 		
 		List<reviewForm> list =
 		reviewSVC.findReview(loginMember.getMemberId());
+		
+		log.info("reviewList:{}",list);
 
 		
 		model.addAttribute("reList",list);

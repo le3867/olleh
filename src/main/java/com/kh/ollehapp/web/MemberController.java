@@ -287,7 +287,16 @@ public String edit(@Valid @ModelAttribute ModifyForm modifyForm,
 	
 	log.info("회원수정처리:{}",mdto);
 	
-	return "redirect:/";
+	response.setContentType("text/html; charset=UTF-8");
+	 
+	PrintWriter out = response.getWriter();
+	 
+	out.println("<script>alert('수정이 완료되었습니다.'); location.href='javascript:history.back()';</script>");
+	 
+	out.flush();
+
+	return "mypage/modifyMember";
+	
 }
 
 /**
@@ -514,7 +523,7 @@ public String deleteBookmark(@PathVariable long bookmarkNum) {
 	
 	memberSVC.deleteBookmark(bookmarkNum);
 	
-	return "home";
+	return "redirect:/member/bookmark";
 	
 }
 }

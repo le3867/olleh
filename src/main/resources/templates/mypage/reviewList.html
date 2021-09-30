@@ -8,6 +8,11 @@
 	<link rel="stylesheet" href="/css/reviewList.css" />
 	
 </head>
+<style>
+table{table-layout:fixed }
+table th{text-align: center; width:140px;} 
+table td {text-align:center; padding: 6px; width:140px; height: 15px; box-sizing: border-box; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; }
+</style>
 <body>
  <header>
     <div class="container-text">
@@ -71,7 +76,7 @@
         <td><a th:text="${reviewList.reviewTitle}" th:href="@{|/${reviewList.reviewNum}/detailReview|}">리뷰제목</a></td>
         <td th:text="${reviewList.exprnvillageNm}">딸기농장</td>
         <td th:text="${reviewList.rdnmadr}">울산 울주군 </td>
-        <td th:text="${reviewList.experience}">체험프로그램명</td>
+        <td th:text="${reviewList.exprnCn}">체험프로그램명</td>
         
     </tr>
 </table>
