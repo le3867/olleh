@@ -123,6 +123,14 @@ void deleteInquiry(String inquiryNum);
  * 관심리스트 목록
  */
 List<bookmarkForm> bookmarkList(String memberId);
+
+/**
+ * 관심리스트 페이징 목록
+ * @param startRec
+ * @param endRec
+ * @param memberId
+ * @return
+ */
 List<bookmarkForm> list(int startRec, int endRec,String memberId);
 
 /**

@@ -6,6 +6,7 @@ import com.kh.ollehapp.review.dto.CommentDTO;
 import com.kh.ollehapp.review.dto.ReviewDTO;
 import com.kh.ollehapp.village.dto.BookmarkDTO;
 import com.kh.ollehapp.village.dto.VillageDTO;
+import com.kh.ollehapp.web.form.bookmarkForm;
 
 public interface VillageSVC {
 
@@ -32,5 +33,19 @@ void deleteComment(long commentNum);
 
 //검색
 List<VillageDTO> searchVill(String searchContent,String searchContent2);
+
+/**
+ * 관심리스트 전체 요청페이지 목록
+ * @param startRec
+ * @param endRec
+ * @return
+ */	
+List<ReviewDTO> list(int startRec, int endRec,long id);
+
+/**
+ * 게시판 전체 레코드 수 
+ * @return
+ */
+long totoalRecordCount(long id);
 }
 

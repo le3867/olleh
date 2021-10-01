@@ -10,6 +10,7 @@ import com.kh.ollehapp.review.dto.CommentDTO;
 import com.kh.ollehapp.review.dto.ReviewDTO;
 import com.kh.ollehapp.village.dto.BookmarkDTO;
 import com.kh.ollehapp.village.dto.VillageDTO;
+import com.kh.ollehapp.web.form.bookmarkForm;
 
 import lombok.RequiredArgsConstructor;
 
@@ -156,6 +157,44 @@ public List<VillageDTO> searchVill(String searchContent,String searchContent2) {
 	
 	List<VillageDTO> list = jt.query(sql.toString(), new BeanPropertyRowMapper<>(VillageDTO.class),searchContent,searchContent2);
 	return list;
+}
+
+
+/**
+ * 리뷰목록
+ */
+@Override
+public List<ReviewDTO> list(int startRec, int endRec, long id) {
+	StringBuffer sql = new StringBuffer();
+	sql.append(" select t1.* ");
+	sql.append(" from (select row_number() ");
+	sql.append(" over(order by reviewNum desc) as num, ");
+	sql.append(" reviewNum,reviewtitle, memberId, rcdate,");
+	sql.append("  rdnmadr,review.id from review,village ");
+	sql.append("  where village.id = review.id ) ");
+	sql.append(" t1 where num between ? and ? and id=? ");
+	
+	List<ReviewDTO> list = jt.query(
+			sql.toString(), 
+			new BeanPropertyRowMapper<>(ReviewDTO.class),
+			startRec,endRec,id
+			);	
+return list;
+}
+
+/**
+ * 리뷰 전체 레코드수
+ */
+@Override
+public long totoalRecordCount(long id) {
+	
+	StringBuffer sql = new StringBuffer();
+	sql.append("select count(*) ");
+	sql.append("	from review ");
+	sql.append("	where Id = ? ");
+	
+	long totalCount = jt.queryForObject(sql.toString(), Long.class , id);
+	return totalCount;
 }
 }
 

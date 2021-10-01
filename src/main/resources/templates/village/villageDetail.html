@@ -103,6 +103,21 @@ button{
 .vilInput{
 display:none;}
 
+    .wrap-bbs-paging{
+    	display:flex;
+    	justify-content: center;
+    }
+    .page-link{color:black; padding:0px; margin-left:15px;  text-align : center; }
+    
+    #nowPage{color:white; background-color:black;}
+    
+    ul,li{
+    text-align : center;
+      list-style:none;}
+      
+      .justify-content-center
+      {height:20px; line-height:20px; text-align : center;
+      display:flex; justify-content:center;}
 
 </style>
 <body>
@@ -168,10 +183,25 @@ display:none;}
     </tr>
   </tbody>
 </table>
-
-
-
 </div>
+  <!-- 페이징 -->
+							<div class="wrap-bbs-paging" style="transform:translateX(-15px)">
+							  <ul class="pagination pagination-sm justify-content-center">
+							    <th:block th:each="pnum : ${#numbers.sequence(fc.startPage,fc.endPage)}">
+							    	<th:block th:if="${pnum != 0}">
+	 									<li class="page-item active" aria-current="page"
+	 											th:if="${fc.rc.reqPage == pnum}">
+								      <span class="page-link" id="nowPage" th:text="${pnum}">1</span>
+								    </li>							    
+								    <li class="page-item" 
+								    		th:if="${fc.rc.reqPage != pnum}">
+								    	<a class="page-link" href="#" th:href="@{/village/{id}/{reqPage}(reqPage=${pnum},id=${village.id})}" th:text="${pnum}">3</a>
+								    </li>
+								    </th:block>
+							    </th:block>
+							   
+							  </ul>
+							</div>
 <p class="mainTitle">주변 관광지</p>
 <div class="footer">
   <div id="map"  style="width:100%;height:600px;"></div>

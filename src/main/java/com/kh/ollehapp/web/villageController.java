@@ -1,10 +1,15 @@
 package com.kh.ollehapp.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.ollehapp.domain.common.paging.FindCriteria;
 import com.kh.ollehapp.review.dto.CommentDTO;
 import com.kh.ollehapp.review.dto.ReviewDTO;
 import com.kh.ollehapp.review.dto.ReviewViewDTO;
@@ -23,6 +29,7 @@ import com.kh.ollehapp.village.dto.VillageDTO;
 import com.kh.ollehapp.village.svc.VillageSVC;
 import com.kh.ollehapp.web.api.JsonResult;
 import com.kh.ollehapp.web.form.LoginMember;
+import com.kh.ollehapp.web.form.bookmarkForm;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +42,10 @@ public class villageController {
 
 	private final VillageSVC villageSVC;
 	private final ReviewSVC reviewSVC;
+	@Autowired
+	@Qualifier("fc10")
+	private FindCriteria fc;
+
 	
 	/**
 	 * 마을상세목록
@@ -42,18 +53,33 @@ public class villageController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/{id}")
-	public String village(@PathVariable long id,Model model) {
+	@GetMapping({"/{id}","/{id}/{reqPage}"})
+	public String village(@PathVariable long id,@PathVariable(required = false) Integer reqPage,Model model) {
+		
+		List<ReviewDTO> list = null;
 		
 		VillageDTO villageDTO = villageSVC.villageData(id);
-		List<ReviewDTO> list = villageSVC.searchReview(id);
 		int score = villageSVC.villageScore(id);
+		
+		
+	//요청페이지가 없으면 1페이지로
+			if(reqPage == null) reqPage = 1;
+			//사용자가 요청한 페이지번호
+			fc.getRc().setReqPage(reqPage);	
+		
+			fc.setTotalRec(villageSVC.totoalRecordCount(id));
+			
+			list = villageSVC.list(
+					fc.getRc().getStartRec(),
+					fc.getRc().getEndRec(),id);	
+		
 		
 		log.info("score",score);
 		
 		model.addAttribute("village",villageDTO);
 		model.addAttribute("reviewList",list);
 		model.addAttribute("villageScore",score);
+		model.addAttribute("fc",fc);
 		
 		log.info("villageDTO:{}",villageDTO);
 		return "village/villageDetail";
@@ -61,13 +87,26 @@ public class villageController {
 	
 	/**
 	 * 관심리스트 등록
+	 * @throws IOException 
 	 */
 	@GetMapping("/{id}/bookmark")
-	public String attention(@PathVariable long id,HttpServletRequest request) {
+	public String attention(@PathVariable long id,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
 		HttpSession session = request.getSession(false);
 		LoginMember loginMember 
 		= (LoginMember)session.getAttribute("loginMember");
+		
+		if(loginMember.getMemberId()==null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script>alert('로그인이 필요합니다.'); location.href='/login/loginMember';</script>");
+			 
+			out.flush();
+
+			return "member/inquiry";
+		}
 		
 		
 		

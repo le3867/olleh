@@ -1,6 +1,7 @@
 package com.kh.ollehapp.village.svc;
 
 import com.kh.ollehapp.village.svc.VillageSVC;
+import com.kh.ollehapp.web.form.bookmarkForm;
 
 import lombok.RequiredArgsConstructor;
 
@@ -88,5 +89,42 @@ public List<VillageDTO> searchVill(String searchContent,String searchContent2) {
 	
 	return villageDAO.searchVill(searchContent,searchContent2);
 }
+
+
+@Override
+public List<ReviewDTO> list(int startRec, int endRec, long id) {
+	List<ReviewDTO> list = villageDAO.list(startRec,endRec,id);
+	return list;
+}
+	
+//게시판 전체 레코드수
+@Override
+public long totoalRecordCount(long id) {
+
+	return villageDAO.totoalRecordCount(id);
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

@@ -11,9 +11,11 @@ $bmBtn.addEventListener("click",e=>{
 	return;
 });
 
-const $reviewTitle = document.querySelector('.Title');
+const $reviewTitle = document.querySelectorAll('.Title');
 
-$reviewTitle.addEventListener("click",e=>{
+for(const button of $reviewTitle){
+	button.addEventListener("click",e=>{
 	const reviewNum = e.target.dataset.reviewnum;
 	location.href=`/village/${reviewNum}/reviewDetail`;
 });
+	}
