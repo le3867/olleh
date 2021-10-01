@@ -2,6 +2,7 @@ package com.kh.ollehapp.village.svc;
 
 import com.kh.ollehapp.village.svc.VillageSVC;
 import com.kh.ollehapp.web.form.bookmarkForm;
+import com.kh.ollehapp.web.form.villageForm;
 
 import lombok.RequiredArgsConstructor;
 
@@ -102,6 +103,12 @@ public List<ReviewDTO> list(int startRec, int endRec, long id) {
 public long totoalRecordCount(long id) {
 
 	return villageDAO.totoalRecordCount(id);
+}
+
+@Override
+public List<villageForm> ranking() {
+	
+	return villageDAO.ranking();
 }
 	
 

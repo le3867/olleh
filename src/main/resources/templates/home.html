@@ -10,12 +10,28 @@
 
     <title>농어촌 Olleh</title>
     <style>
+    .upm-menu{transform:translateY(10px);}
     	html{
     		height:950px;
     	}
     	body{
     	margin:0;
     	}
+    	.rankFont{text-decoration:none; color:black;}
+    	.rank{
+    	display:inline-block;
+    	text-align:center;
+    	font-size:2rem;
+    	font-weight:border;
+    	transform:translate(860px,100px);
+    	outline:1px solid black;
+    	border-radius:5px;
+    	cursor:pointer;}
+    	
+    	.rank:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+}
     </style>
     <body style="overflow-x: hidden"></body>
 </head>
@@ -73,7 +89,8 @@
             <div class="main1">
               <h1>농어촌 Olleh</h1>
               <p>도심을 떠나 자연에서 보내는 시간 </p>
-              <button type="button" class="button_1" onclick="javascript:location.href='/map/1'">👨 🌾 여행지 검색</button>
+              <button type="button" class="button_1" onclick="javascript:location.href='/map/1'">👨 🌾 여행지 검색</button><br>
+              <button type="button" class="button_1" style="transform:translateY(30px)" onclick="javascript:location.href='/village/ranking'">👨 🌾 추천여행지</button>
             </div>
         </section>
         <section>
@@ -89,6 +106,5 @@
 		<p>COPYRIGHT ⓒ 2016 BY KRC Corporation. ALL RIGHTS RESERVED</p>
   </div>
     </footer>
-  
   </body>
 </html>

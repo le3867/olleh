@@ -7,6 +7,7 @@ import com.kh.ollehapp.review.dto.ReviewDTO;
 import com.kh.ollehapp.village.dto.BookmarkDTO;
 import com.kh.ollehapp.village.dto.VillageDTO;
 import com.kh.ollehapp.web.form.bookmarkForm;
+import com.kh.ollehapp.web.form.villageForm;
 
 public interface VillageSVC {
 
@@ -47,5 +48,11 @@ List<ReviewDTO> list(int startRec, int endRec,long id);
  * @return
  */
 long totoalRecordCount(long id);
+
+
+/**
+ * 랭킹페이지
+ */
+List<villageForm> ranking();  
 }
 

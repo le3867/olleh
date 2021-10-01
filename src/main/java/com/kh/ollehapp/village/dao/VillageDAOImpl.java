@@ -11,6 +11,7 @@ import com.kh.ollehapp.review.dto.ReviewDTO;
 import com.kh.ollehapp.village.dto.BookmarkDTO;
 import com.kh.ollehapp.village.dto.VillageDTO;
 import com.kh.ollehapp.web.form.bookmarkForm;
+import com.kh.ollehapp.web.form.villageForm;
 
 import lombok.RequiredArgsConstructor;
 
@@ -195,6 +196,21 @@ public long totoalRecordCount(long id) {
 	
 	long totalCount = jt.queryForObject(sql.toString(), Long.class , id);
 	return totalCount;
+}
+
+/**
+ * 랭킹
+ */
+@Override
+public List<villageForm> ranking() {
+	StringBuffer sql = new StringBuffer();
+	sql.append(" select Rownum,x.* from(  ");
+	sql.append(" select exprnvillageNM,exprncn,rdnmadr,village.id,villageLatitude,villageLongitude,avg(score)\"score\" ");
+	sql.append(" from review,village where review.id = village.id ");
+	sql.append(" group by exprnvillageNM,exprncn,rdnmadr,village.id,villageLatitude,villageLongitude order by avg(score) desc)x ");
+		
+List<villageForm> list = jt.query(sql.toString(), new BeanPropertyRowMapper<>(villageForm.class));
+	return list;
 }
 }
 

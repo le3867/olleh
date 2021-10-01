@@ -30,6 +30,7 @@ import com.kh.ollehapp.village.svc.VillageSVC;
 import com.kh.ollehapp.web.api.JsonResult;
 import com.kh.ollehapp.web.form.LoginMember;
 import com.kh.ollehapp.web.form.bookmarkForm;
+import com.kh.ollehapp.web.form.villageForm;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -158,8 +159,20 @@ public String reviewDetail(		@PathVariable long reviewNum,
 		return "village/searchVill";
 	}
 	
-	
-	
+	/**
+	 * 랭킹페이지
+	 */
+	@GetMapping("/ranking")
+	public String ranking(Model model) {
+		
+		List<villageForm> list = villageSVC.ranking();
+		
+		log.info("list:{}",list);
+
+		model.addAttribute("sList",list);
+		
+		return "village/Ranking";
+	}
 	
 	
 	

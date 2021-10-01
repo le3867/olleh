@@ -93,3 +93,5 @@ $regionBtn9.addEventListener('click',e=>{
 		location.href=`/map/${region}`;
 		return;
 });
+
+
