@@ -3,8 +3,10 @@
  */
 'use strict';
  
- const $delBtn = document.getElementById('delBtn');
-$delBtn.addEventListener('click',e=>{
+ const $delBtn = document.querySelectorAll('.button_2');
+
+for(const button of $delBtn){
+		button.addEventListener('click',e=>{
     if(confirm('예약 삭제하시겠습니까?') == true){
 		const reservationNum = e.target.dataset.reservationnum;
 		location.href=`/manager/${reservationNum}/deleteManagerReservation`
@@ -14,6 +16,7 @@ $delBtn.addEventListener('click',e=>{
         alert('취소되었습니다.')
     }
 });
+}
 function togglereservtion() {
   const div = document.getElementById('reservtion');
   
