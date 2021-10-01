@@ -42,7 +42,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		sql.append("   reservationDate, ");
 		sql.append("   checkin, ");
 		sql.append("   total, ");
-		sql.append("   reservation.exprnCn ");
+		sql.append("   reservation.exprnCn,village.id ");
 		sql.append("   from village,reservation,member ");
 		sql.append("  where village.id=reservation.id ");
 		sql.append("    and member.memberId = reservation.memberId ");

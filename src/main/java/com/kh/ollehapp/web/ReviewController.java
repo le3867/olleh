@@ -43,8 +43,9 @@ public class ReviewController {
 	private final VillageSVC villageSVC;
 	
 	//리뷰 양식
-	@GetMapping("/review")
-	public String review() {
+	@GetMapping("/{id}/review")
+	public String review(@PathVariable long id,Model model) {
+		model.addAttribute("villid",id);
 		return "mypage/review";
 	}
 	
@@ -60,8 +61,9 @@ public class ReviewController {
 		LoginMember loginMember 
 			= (LoginMember)session.getAttribute("loginMember");
 		
-
-		ReviewDTO reviewDTO2 = reviewSVC.findReservation(loginMember.getMemberId());
+		log.info("reviewDTO:{}",reviewDTO);
+		
+		ReviewDTO reviewDTO2 = reviewSVC.findReservation(loginMember.getMemberId(),reviewDTO.getId());
 		ReviewDTO storedReviewDTO = reviewSVC.editReview(reviewDTO,reviewDTO2);
 		
 						

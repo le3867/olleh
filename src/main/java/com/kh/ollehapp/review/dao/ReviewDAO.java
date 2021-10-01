@@ -12,7 +12,7 @@ public interface ReviewDAO {
 	ReviewDTO editReview(ReviewDTO reviewDTO);
 	
 	//예약조회
-	ReviewDTO findReservation(String memberId);
+	ReviewDTO findReservation(String memberId,long id);
 	
 	//리뷰목록
 	List<reviewForm> findReview(String memberId);

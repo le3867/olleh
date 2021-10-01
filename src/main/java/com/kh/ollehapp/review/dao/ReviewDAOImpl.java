@@ -70,16 +70,17 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	//예약조회
 	@Override
-	public ReviewDTO findReservation(String memberId) {
+	public ReviewDTO findReservation(String memberId,long id) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" select memberId,id ");
 		sql.append("  from reservation ");
 		sql.append(" where memberId=?  ");
+		sql.append(" and Id=?  ");
 		
 		
 		try {
 			ReviewDTO reviewDTO = jdbcTemplate.queryForObject(sql.toString(),
-							new BeanPropertyRowMapper<>(ReviewDTO.class),memberId);
+							new BeanPropertyRowMapper<>(ReviewDTO.class),memberId,id);
 			return reviewDTO;
 			
 			}catch (EmptyResultDataAccessException e) {

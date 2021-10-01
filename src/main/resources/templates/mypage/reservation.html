@@ -74,20 +74,32 @@
         <td th:text="${reservation.checkin}">시간</td>
         <td th:text="${reservation.total}">인원</td>
         <td th:text="${reservation.exprnCn}">프로그램명</td>  
-        <td><button type="button" id="canBtn" onclick="javascript:location.href='/review'" style="transform:translateY(-10px);">리뷰</button>
+        <td><button type="button" id="canBtn" class="reviewBtn" th:data-id="${reservation.id}" style="transform:translateY(-10px);">리뷰</button>
         		<button type="button" id="canBtn" class="delBtn" style="transform:translateY(10px);" th:data-resernum = "${reservation.reservationNum}">취소</button>
         </td>
         
 </table>
 </choose>
 <script>
-	const $delBtn = document.querySelector('.delBtn')
-	$delBtn.addEventListener("click",e=>{
+	const $delBtn = document.querySelectorAll('.delBtn')
+for(const button of $delBtn){
+	button.addEventListener("click",e=>{
 
 		const reservationNum = e.target.dataset.resernum;
 		console.log(reservationNum);
 		location.href=`/${reservationNum}/deleteReservation`;
 	});
+}
+	
+	const $reviewBtn = document.querySelectorAll('.reviewBtn')
+	for(const button of $reviewBtn){
+		button.addEventListener("click",e=>{
+
+			const id = e.target.dataset.id;
+		
+			location.href=`/${id}/review`;
+		});
+	}
 </script>
 </body>
 </html>

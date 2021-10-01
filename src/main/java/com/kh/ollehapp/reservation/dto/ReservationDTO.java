@@ -15,4 +15,5 @@ public class ReservationDTO {
 	private String ctprvnNm;
 	private String signguNm;
 	private String exprnSe;
+	private long id;
 }

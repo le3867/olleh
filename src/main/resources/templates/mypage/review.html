@@ -52,7 +52,7 @@
     </div>
     <form th:action="@{/reviewEdit}" th:method="post" enctype="multipart/form-data">
     <div class="container">    
-   
+   	<input type="text" name="id" th:value="${villid}" style="display:none;" />
         <label for="subject">제목</label><input type="text" id="a" maxlength="50" autocomplete="off" name="reviewTitle"/>
         <label for="content">내용</label> <textarea id="b" cols="130" maxlength="200" rows="30" autocomplete="off" name="reviewContent"></textarea>
         <span for="star">별점</span>

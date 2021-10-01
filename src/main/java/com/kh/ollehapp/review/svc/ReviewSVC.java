@@ -17,7 +17,7 @@ public interface ReviewSVC {
 	/**
 	 * 예약조회
 	 */
-	ReviewDTO findReservation(String memberId);
+	ReviewDTO findReservation(String memberId,long id);
 	
 	/**
 	 * 예약목록

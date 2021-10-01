@@ -76,9 +76,9 @@ public class ReviewSVCImpl implements ReviewSVC{
 	 * 예약조회
 	 */
 	@Override
-	public ReviewDTO findReservation(String memberId) {
+	public ReviewDTO findReservation(String memberId,long id) {
 		
-		return reviewDAO.findReservation(memberId);
+		return reviewDAO.findReservation(memberId,id);
 	}
 	/**
 	 * 리뷰조회
