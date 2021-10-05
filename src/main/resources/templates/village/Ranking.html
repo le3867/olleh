@@ -112,7 +112,7 @@ height:100%;
     </tr>
 
     <tr th:each="village : ${sList}">
-    	<th th:text="${village.ROWNUM}">1</th>
+    	<th th:text="${village.ROWNUM}" style="font-size:1.5rem; color:red;">1</th>
       <td class="villageTitle" th:text="${village.exprnVillageNm}" th:data-villageid="${village.id}">1</td>
       <td th:text="${village.exprnCn}">만들기체험</td>
       <td th:text="${village.rdnmadr}">마징가Z만들기</td>

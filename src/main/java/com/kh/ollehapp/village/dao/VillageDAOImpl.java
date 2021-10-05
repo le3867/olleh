@@ -172,13 +172,13 @@ public List<ReviewDTO> list(int startRec, int endRec, long id) {
 	sql.append(" over(order by reviewNum desc) as num, ");
 	sql.append(" reviewNum,reviewtitle, memberId, rcdate,");
 	sql.append("  rdnmadr,review.id from review,village ");
-	sql.append("  where village.id = review.id ) ");
+	sql.append("  where village.id = review.id and village.id=? ) ");
 	sql.append(" t1 where num between ? and ? and id=? ");
 	
 	List<ReviewDTO> list = jt.query(
 			sql.toString(), 
 			new BeanPropertyRowMapper<>(ReviewDTO.class),
-			startRec,endRec,id
+			id,startRec,endRec,id
 			);	
 return list;
 }

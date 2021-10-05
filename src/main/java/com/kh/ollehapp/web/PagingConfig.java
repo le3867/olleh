@@ -17,7 +17,7 @@ public class PagingConfig {
 	static final int REC10 = 3;  //한페이지에 보여줄 레코드수
 	static final int PAGE10 = 3;	//한페이지에 보여줄 페이지수
 	
-	static final int REC5 = 3;  //한페이지에 보여줄 레코드수
+	static final int REC5 = 5;  //한페이지에 보여줄 레코드수
 	static final int PAGE5 = 5;	//한페이지에 보여줄 페이지수
 	
 	@Bean(name = "rec10")

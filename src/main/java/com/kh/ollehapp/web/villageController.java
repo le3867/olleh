@@ -75,14 +75,14 @@ public class villageController {
 					fc.getRc().getEndRec(),id);	
 		
 		
-		log.info("score",score);
+	
 		
 		model.addAttribute("village",villageDTO);
 		model.addAttribute("reviewList",list);
 		model.addAttribute("villageScore",score);
 		model.addAttribute("fc",fc);
 		
-		log.info("villageDTO:{}",villageDTO);
+		log.info("list:{}",list);
 		return "village/villageDetail";
 	}
 	
